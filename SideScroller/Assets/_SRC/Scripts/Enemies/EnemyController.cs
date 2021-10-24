@@ -76,8 +76,8 @@ namespace MiloZitare
             //Destroy(this.gameObject);
             if(OnDeath != null && OnDeath.Target != null)
             {
-                death.IsDead(true);
-                OnDeath.Invoke();
+                death?.IsDead(true);
+                OnDeath?.Invoke();
             }
             this.gameObject.SetActive(false);
         }
