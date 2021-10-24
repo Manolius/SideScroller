@@ -4,14 +4,17 @@ using UnityEngine;
 
 namespace MiloZitare
 {
-    public class PickUpController : MonoBehaviour
+    public abstract class PickUpController : MonoBehaviour
     {
         public delegate void DelegateDetachOwner();
         public event DelegateDetachOwner DetachOwner;
 
         public delegate void DelegateOnUseFinished();
         public event DelegateOnUseFinished OnUseFinished;
-        
+
+        //public delegate void FullResetDelegate();
+        //public event FullResetDelegate onFullReset;
+
         public void Equip(Transform _equipPoint , DelegateDetachOwner _DetachMethod)
         {
             DetachOwner += _DetachMethod;
@@ -29,13 +32,13 @@ namespace MiloZitare
         }
 
         /// <summary>
-        /// When the object is use is finished 
+        /// When the object use is finished 
         /// </summary>
         protected virtual void DetachFromOwner()
         {
             transform.parent = null;
             transform.position -= Vector3.forward * 100; //Lo mueve a un lugar donde no se lo vera mas
-            DetachOwner();
+            DetachOwner?.Invoke();
         }
 
         /// <summary>
@@ -44,8 +47,25 @@ namespace MiloZitare
         protected virtual void UseFinished()
         {
             this.gameObject.SetActive(false);
-            OnUseFinished();
+            OnUseFinished?.Invoke();
         }
+
+        protected virtual void OnDisable()
+        {
+            //DetachFromOwner();
+            //DetachOwner?.Invoke();
+            //if (!(bool)this.transform.parent?.gameObject.activeSelf)
+            //{
+            //    fullReset();
+            //    onFullReset?.Invoke();
+            //}
+            //OnUseFinished();
+        }
+
+        public abstract void FullReset();
+  
+
+        //protected abstract void fullReset();
 
     }
 

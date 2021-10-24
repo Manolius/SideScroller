@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MiloZitare
 {
-    public abstract class CanPickUp : MonoBehaviour
+    public abstract class CanPickUp : ResetOnPlayerDeath
     {
         [HideInInspector]public bool canPickUp = true;
         public abstract PickUpController TakePickUp();

@@ -26,5 +26,9 @@ namespace MiloZitare
             return null;
         }
 
+        public override void ResetOnPlayerRespawn()
+        {
+            Debug.LogError($"Reset isnt implemented");
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace MiloZitare
 
         public override void StartState()
         {
-            rb.velocity = Vector3.zero;
+            if(rb != null)rb.velocity = Vector3.zero;
         }
 
         public override void StopState()

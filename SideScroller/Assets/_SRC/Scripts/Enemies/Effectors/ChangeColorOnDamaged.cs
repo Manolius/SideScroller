@@ -11,14 +11,25 @@ namespace MiloZitare
 
         [SerializeField] Color newColor;
         Color previousColor;
-        [SerializeField] float timeToReturn = 0.1f; 
+        [SerializeField] float timeToReturn = 0.1f;
+
+        bool isInitialized = false;
 
         private void Start()
         {
-           enemyController = GetComponent<EnemyController>();
+            enemyController = GetComponent<EnemyController>();
             enemyController.OnReceiveDamage += ChangeColor;
             material = enemyController.GetComponent<Renderer>().material;
             previousColor = material.color;
+            isInitialized = true;
+        }
+
+        private void OnEnable()
+        {
+            if (isInitialized)
+            {
+
+            }
         }
 
         void ChangeColor()
@@ -38,6 +49,7 @@ namespace MiloZitare
         {
             if(enemyController != null)
             {
+                material.color = previousColor;
                 enemyController.OnReceiveDamage -= ChangeColor;
             }
             StopAllCoroutines();

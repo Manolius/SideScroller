@@ -41,7 +41,7 @@ namespace MiloZitare
 
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.transform.CompareTag("PickUp"))
+            if (collider.transform.CompareTag(TagConstants.PICKUP))
             {
                 if (pickUp == null)
                 {

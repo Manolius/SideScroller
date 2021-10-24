@@ -20,6 +20,8 @@ namespace MiloZitare
         public delegate void DelegateOnDeath();
         public event DelegateOnDeath OnDeath;
 
+        IDeath death;
+
         public struct AttackInfo
         {
             public bool wasEffective;
@@ -27,11 +29,20 @@ namespace MiloZitare
         }
         AttackInfo attackInfo = new AttackInfo();
 
+        private void Start()
+        {
+            death = GetComponentInChildren<IDeath>();
+            print("hola" + death);
+        }
 
         void Awake()
         {
-            currentHealth = healthBarCombo.Count;
             healthBarCombo.Reverse();
+        }
+
+        private void OnEnable()
+        {
+            currentHealth = healthBarCombo.Count;
         }
 
 
@@ -62,12 +73,13 @@ namespace MiloZitare
 
         protected virtual void Die()
         {
-            Destroy(this.gameObject);
-            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
             if(OnDeath != null && OnDeath.Target != null)
             {
+                death.IsDead(true);
                 OnDeath.Invoke();
             }
+            this.gameObject.SetActive(false);
         }
     }
 

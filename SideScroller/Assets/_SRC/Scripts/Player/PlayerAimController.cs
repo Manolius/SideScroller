@@ -46,6 +46,7 @@ namespace MiloZitare
             else
             {
                 Direction = LastHorizontalDirection;
+                AngleFromRight = Vector2.SignedAngle(Vector2.right, Direction);
             }
         }
     }

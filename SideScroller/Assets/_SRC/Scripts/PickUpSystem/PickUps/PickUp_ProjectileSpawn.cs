@@ -10,6 +10,7 @@ namespace MiloZitare
         [SerializeField] int maxAmmo = 1;
         [SerializeField]protected List<GameObject> ammo;
         int currentAmmo;
+        private bool isFullReseting;
 
         private void Start()
         {
@@ -41,19 +42,21 @@ namespace MiloZitare
                 currentAmmo--;
                 CheckProjectiles();
             }
-            if(currentAmmo <= 0)
+            if (currentAmmo <= 0)
             {
                 DetachFromOwner();
             }
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             currentAmmo = ammo.Count;
         }
 
         private void CheckProjectiles()
         {
+            if (isFullReseting) return;
             foreach (GameObject _projectile in ammo)
             {
                 if (_projectile.activeInHierarchy || currentAmmo > 0)
@@ -61,7 +64,20 @@ namespace MiloZitare
                     return;
                 }
             }
+            //DetachFromOwner();
             UseFinished();
+        }
+
+        public override void FullReset()
+        {
+            isFullReseting = true;
+            foreach (var _projectile in ammo)
+            {
+                _projectile.SetActive(false);
+            }
+            DetachFromOwner();
+            this.gameObject.SetActive(false);
+            isFullReseting = false;
         }
 
     }

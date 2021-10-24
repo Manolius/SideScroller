@@ -19,10 +19,9 @@ public class EnemyHealthDisplay : MonoBehaviour
         CreateIcons();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        UpdateIcons();
     }
 
     public void CreateIcons()
