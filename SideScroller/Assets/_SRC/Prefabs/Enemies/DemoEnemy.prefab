@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackType: {fileID: 11400000, guid: fd9940c3f19789d47ae759170c4fb819, type: 2}
-  validAngle: 91
+  validAngle: 95
   bounceAmount: 10
 --- !u!114 &933991506058322881
 MonoBehaviour:
